@@ -1,6 +1,6 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  Table [dbo].[BookLocations]    Script Date: 5/19/2021 6:18:12 PM ******/
+/****** Object:  Table [dbo].[BookLocations]    Script Date: 6/16/2021 6:25:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

@@ -1,15 +1,16 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  Table [dbo].[Books]    Script Date: 5/19/2021 6:18:12 PM ******/
+/****** Object:  Table [dbo].[Books]    Script Date: 6/16/2021 6:25:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Books](
 	[BookID] [int] IDENTITY(1,1) NOT NULL,
+	[BookTitle] [varchar](50) NOT NULL,
 	[BookPublisher] [varchar](50) NOT NULL,
 	[DatePublished] [datetime] NOT NULL,
-	[Summary] [text] NOT NULL,
+	[Summary] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_Books] PRIMARY KEY CLUSTERED 
 (
 	[BookID] ASC
