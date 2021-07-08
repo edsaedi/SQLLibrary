@@ -30,5 +30,11 @@ VALUES ('Play')
 
 SELECT * FROM Genres
 
+SELECT * FROM Accounts
+
 -- A delete function I used ->
 --DELETE FROM Genres WHERE GenreID = 8
+
+DELETE FROM Accounts WHERE USERID = 1003
+
+GRANT EXECUTE TO edanSqlLogin
