@@ -1,0 +1,19 @@
+
+Accounts:
+-Add an account
+-Change password
+
+Locations:
+-Add Location
+-Edit Location information
+-Delete location
+
+Books:
+-Add Book
+-Edit Book
+
+Genre:
+-Add genre
+
+Authors:
+-Add author
