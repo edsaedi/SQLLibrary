@@ -1,6 +1,6 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  UserDefinedFunction [dbo].[fn_IsUsernameUnique]    Script Date: 7/14/2021 6:18:33 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[fn_IsUsernameUnique]    Script Date: 7/21/2021 6:20:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
