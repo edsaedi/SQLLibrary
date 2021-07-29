@@ -9,24 +9,41 @@ namespace SQL_Library
     {
         static void Main(string[] args)
         {
-            using SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["Server"].ConnectionString);
+            //using SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["Server"].ConnectionString);
 
-            using SqlCommand sqlCommand = new SqlCommand("usp_", sqlConnection);
+            //using SqlCommand sqlCommand = new SqlCommand("usp_", sqlConnection);
 
-            sqlCommand.Parameters.Add(new SqlParameter());
+            //sqlCommand.CommandType = CommandType.StoredProcedure;
 
-            sqlCommand.ExecuteNonQuery();
+            //sqlCommand.Parameters.Add(new SqlParameter());
 
-            using SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+            //sqlCommand.ExecuteNonQuery();
 
-            DataTable data = new DataTable();
+            //using SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
-            sqlDataAdapter.Fill(data);
+            //DataTable data = new DataTable();
 
-            string name = (string)data.Rows[0]["First Name"];
+            //sqlDataAdapter.Fill(data);
+
+            //string name = (string)data.Rows[0]["First Name"];
 
 
-            Console.WriteLine("Hello World!");
+            //Console.WriteLine("Hello World!");
+
+            User user = new User();
+
+            Console.WriteLine("Enter in a username");
+            string username = Console.ReadLine();
+
+            Console.WriteLine("Enter in a password");
+            string password = Console.ReadLine();
+
+            Console.WriteLine(user.IsValid(username, password));
+
+            Console.WriteLine("Enter in a new password");
+            string newPassword = Console.ReadLine();
+
+            Console.WriteLine(user.ChangePassword(1, newPassword));
         }
     }
 }

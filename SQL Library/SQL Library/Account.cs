@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace SQL_Library
 {
-   
+
     //public enum AccountTypes
     //{
     //    User,
@@ -23,8 +23,6 @@ namespace SQL_Library
     /// </summary>
     abstract class Account
     {
-        bool loggedIn = false;
-        string username = "";
 
         /*some sort of return type Exec(parameters) */
         DataTable CallProc(string storedProcedure, List<SqlParameter> parameters)
@@ -32,11 +30,14 @@ namespace SQL_Library
             using SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["Server"].ConnectionString);
 
             using SqlCommand sqlCommand = new SqlCommand(storedProcedure, sqlConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
 
             for (int i = 0; i < parameters.Count; i++)
             {
                 sqlCommand.Parameters.Add(parameters[i]);
             }
+
+            sqlConnection.Open();
 
             sqlCommand.ExecuteNonQuery();
 
@@ -46,37 +47,34 @@ namespace SQL_Library
 
             sqlDataAdapter.Fill(data);
 
+            sqlConnection.Close();
+
             return data;
         }
 
         //login function
-        bool IsValid(string username, string password)
-        {
-            //SQL code
-            return false;
-        }
+        public bool IsValid(string username, string password)
+            => CallProc("usp_IsValid",
+                    new List<SqlParameter>
+                    {
+                        new SqlParameter("@Username", username),
+                        new SqlParameter("@Password", password)})
+                .Rows.Count == 1;
+
 
         //change password
-        bool ChangePassword(string newPassword)
-        {
-            if(!loggedIn)
-            {
-                return false;
-            }
+        public bool ChangePassword(int id, string newPassword)
+            => int.Parse(CallProc("usp_ChangePassword",
+                        new List<SqlParameter>{
+                        new SqlParameter("@ID", id),
+                        new SqlParameter("@newPassword", newPassword)})
+                        .Rows[0]["RowsUpdated"].ToString()) == 1;
 
-            CallProc("usp_ChangePassword", new List<SqlParameter>
-            {
-                new SqlParameter("@Username", username),
-                new SqlParameter("@NewPassword", newPassword)
-            });
-
-            return false;
-        }
     }
 
     class User : Account { }
-    class Admin : Account 
-    { 
+    class Admin : Account
+    {
         /*void CreateUser(string username, string password, string firstName, string lastName, ____ dob)
         {
 
@@ -85,5 +83,7 @@ namespace SQL_Library
 
 }
 
+
+//Question: How does the table and C# side distinguish between the various data privilages for accounts?
 
 //TODO: make a helper function

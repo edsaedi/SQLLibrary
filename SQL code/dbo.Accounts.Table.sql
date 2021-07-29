@@ -1,6 +1,6 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  Table [dbo].[Accounts]    Script Date: 7/21/2021 6:20:13 PM ******/
+/****** Object:  Table [dbo].[Accounts]    Script Date: 7/28/2021 6:21:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,6 +12,7 @@ CREATE TABLE [dbo].[Accounts](
 	[FirstName] [varchar](50) NOT NULL,
 	[LastName] [varchar](50) NOT NULL,
 	[DOB] [datetime] NOT NULL,
+	[LastLoginTime] [smalldatetime] NOT NULL,
  CONSTRAINT [PK_Accounts] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC
