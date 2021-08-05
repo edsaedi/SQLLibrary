@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [EdanLibraryDB]    Script Date: 7/28/2021 6:21:05 PM ******/
+/****** Object:  Database [EdanLibraryDB]    Script Date: 8/4/2021 6:24:26 PM ******/
 CREATE DATABASE [EdanLibraryDB]
  CONTAINMENT = NONE
  ON  PRIMARY 

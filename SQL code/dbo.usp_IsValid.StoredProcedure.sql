@@ -1,6 +1,6 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  StoredProcedure [dbo].[usp_IsValid]    Script Date: 7/28/2021 6:21:06 PM ******/
+/****** Object:  StoredProcedure [dbo].[usp_IsValid]    Script Date: 8/4/2021 6:24:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

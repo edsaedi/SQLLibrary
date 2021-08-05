@@ -85,5 +85,3 @@ namespace SQL_Library
 
 
 //Question: How does the table and C# side distinguish between the various data privilages for accounts?
-
-//TODO: make a helper function
