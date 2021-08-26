@@ -1,12 +1,13 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  Table [dbo].[Accounts]    Script Date: 8/18/2021 6:21:45 PM ******/
+/****** Object:  Table [dbo].[Accounts]    Script Date: 8/25/2021 6:26:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Accounts](
 	[UserID] [int] IDENTITY(1,1) NOT NULL,
+	[PublicID] [uniqueidentifier] NOT NULL,
 	[Username] [varchar](50) NOT NULL,
 	[Password] [varchar](50) NOT NULL,
 	[FirstName] [varchar](50) NOT NULL,
@@ -19,6 +20,8 @@ CREATE TABLE [dbo].[Accounts](
 	[UserID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Accounts] ADD  CONSTRAINT [DF_Accounts_PublicID]  DEFAULT (newid()) FOR [PublicID]
 GO
 ALTER TABLE [dbo].[Accounts]  WITH CHECK ADD  CONSTRAINT [CK_UniqueAccount] CHECK  (([dbo].[fn_IsUsernameUnique]()=(1)))
 GO

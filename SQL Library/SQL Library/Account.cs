@@ -49,21 +49,28 @@ namespace SQL_Library
 
             sqlConnection.Close();
 
+            
+            
             return data;
         }
 
         //login function
-        public bool IsValid(string username, string password)
-            => CallProc("usp_IsValid",
+        public Guid IsValid(string username, string password)
+        {
+            DataTable table = CallProc("usp_IsValid",
                     new List<SqlParameter>
                     {
                         new SqlParameter("@Username", username),
-                        new SqlParameter("@Password", password)})
-                .Rows.Count == 1;
+                        new SqlParameter("@Password", password)});
+
+            // extract the guid from the table
+            return Guid.Parse(table.Rows[0]["PublicID"].ToString());
+        }
+              //  .Rows.Count == 1;
 
 
         //change password
-        public bool ChangePassword(int id, string newPassword)
+        public bool ChangePassword(Guid id, string newPassword)
             => int.Parse(CallProc("usp_ChangePassword",
                         new List<SqlParameter>{
                         new SqlParameter("@ID", id),
@@ -71,6 +78,8 @@ namespace SQL_Library
                         .Rows[0]["RowsUpdated"].ToString()) == 1;
 
     }
+
+    // GUID
 
     class User : Account { }
     class Admin : Account

@@ -1,21 +1,22 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  StoredProcedure [dbo].[usp_ChangePassword]    Script Date: 8/18/2021 6:21:46 PM ******/
+/****** Object:  StoredProcedure [dbo].[usp_ChangePassword]    Script Date: 8/25/2021 6:26:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+
 CREATE PROCEDURE [dbo].[usp_ChangePassword]
 (
-	@ID int,
+	@ID uniqueidentifier,
 	@NewPassword varchar(50)
 )
 AS
 BEGIN
 	UPDATE dbo.Accounts
 	SET [Password] = @NewPassword
-	WHERE UserID = @ID;
+	WHERE PublicID = @ID;
 
 	SELECT	@@ROWCOUNT	AS RowsUpdated;
 END

@@ -43,7 +43,7 @@ namespace SQL_Library
             Console.WriteLine("Enter in a new password");
             string newPassword = Console.ReadLine();
 
-            Console.WriteLine(user.ChangePassword(1, newPassword));
+            //Console.WriteLine(user.ChangePassword(1, newPassword));
         }
     }
 }

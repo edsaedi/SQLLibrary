@@ -1,19 +1,20 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  UserDefinedFunction [dbo].[fn_IsUserAdmin]    Script Date: 8/18/2021 6:21:45 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[fn_IsUserAdmin]    Script Date: 8/25/2021 6:26:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 CREATE FUNCTION [dbo].[fn_IsUserAdmin]
 (
-	@ID int
+	@ID uniqueidentifier
 )
 RETURNS BIT
 AS
 BEGIN
 	DECLARE @Privilege varchar(50)
-	SET @Privilege = (SELECT Privilege FROM dbo.Accounts WHERE UserID = @ID)
+	SET @Privilege = (SELECT Privilege FROM dbo.Accounts WHERE PublicID = @ID)
 	
 
 	IF(@Privilege = 'Manager')
