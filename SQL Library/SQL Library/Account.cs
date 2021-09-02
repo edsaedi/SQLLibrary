@@ -25,7 +25,7 @@ namespace SQL_Library
     {
 
         /*some sort of return type Exec(parameters) */
-        DataTable CallProc(string storedProcedure, List<SqlParameter> parameters)
+        public DataTable CallProc(string storedProcedure, List<SqlParameter> parameters)
         {
             using SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["Server"].ConnectionString);
 
@@ -49,13 +49,13 @@ namespace SQL_Library
 
             sqlConnection.Close();
 
-            
-            
+
+
             return data;
         }
 
         //login function
-        public Guid IsValid(string username, string password)
+        public Guid? IsValid(string username, string password)
         {
             DataTable table = CallProc("usp_IsValid",
                     new List<SqlParameter>
@@ -63,10 +63,15 @@ namespace SQL_Library
                         new SqlParameter("@Username", username),
                         new SqlParameter("@Password", password)});
 
+            if (table.Rows.Count == 0)
+            {
+                return null;
+            }
+
             // extract the guid from the table
             return Guid.Parse(table.Rows[0]["PublicID"].ToString());
         }
-              //  .Rows.Count == 1;
+        //  .Rows.Count == 1;
 
 
         //change password
@@ -84,13 +89,34 @@ namespace SQL_Library
     class User : Account { }
     class Admin : Account
     {
-        /*void CreateUser(string username, string password, string firstName, string lastName, ____ dob)
-        {
+        public bool CreateUser(string username, string password, string firstName, string lastName, DateTime dob, string privilege, Guid idManager)
 
-        }*/
+        {
+            try
+            {
+                return int.Parse(CallProc("usp_AddUser", new List<SqlParameter>
+                {
+                    new SqlParameter("@Username", username),
+                    new SqlParameter("@Password", password),
+                    new SqlParameter("@FirstName", firstName),
+                    new SqlParameter("@LastName", lastName),
+                    new SqlParameter("@DOB", dob),
+                    new SqlParameter("@privilege", privilege),
+                    new SqlParameter("@idManager", idManager)
+                }).Rows[0]["Clearence"].ToString()) == 1;
+            }
+            catch (SqlException e)
+            {
+                //Duplicate username
+                return false;
+            }
+        }
+
     }
 
 }
+
+
 
 
 //Question: How does the table and C# side distinguish between the various data privilages for accounts?

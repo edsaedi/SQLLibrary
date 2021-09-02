@@ -1,6 +1,6 @@
 USE [EdanLibraryDB]
 GO
-/****** Object:  Table [dbo].[Accounts]    Script Date: 8/25/2021 6:26:21 PM ******/
+/****** Object:  Table [dbo].[Accounts]    Script Date: 9/1/2021 6:22:10 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -22,6 +22,8 @@ CREATE TABLE [dbo].[Accounts](
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[Accounts] ADD  CONSTRAINT [DF_Accounts_PublicID]  DEFAULT (newid()) FOR [PublicID]
+GO
+ALTER TABLE [dbo].[Accounts] ADD  CONSTRAINT [DF_Accounts_LastLoginTime]  DEFAULT (getutcdate()) FOR [LastLoginTime]
 GO
 ALTER TABLE [dbo].[Accounts]  WITH CHECK ADD  CONSTRAINT [CK_UniqueAccount] CHECK  (([dbo].[fn_IsUsernameUnique]()=(1)))
 GO
